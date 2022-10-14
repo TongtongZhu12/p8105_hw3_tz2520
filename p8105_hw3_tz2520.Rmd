@@ -155,3 +155,16 @@ accel_df =
 
 The tidied `accel_df` dataset contains `r nrow(accel_df)` observations and `r ncol(accel_df)` variables. The key variables include `r colnames(accel_df)`.
 
+
+### Calculate the total acitivity per day and table the totals
+
+```{r}
+total_act = 
+  accel_df %>% 
+  group_by(week, day) %>% 
+  summarize(total_activity = sum(count)) 
+   
+knitr::kable(total_act)
+```
+
+There is no apparent trends of total activity based on the table. And there is no regular difference in total activity between weekdays and weekends. 
