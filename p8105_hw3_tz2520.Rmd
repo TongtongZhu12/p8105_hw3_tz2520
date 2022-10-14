@@ -222,7 +222,32 @@ knitr::kable(noaa_missing)
 
 The `ny_noaa` dataset provides weather data of New York State weather stations from Jan. 1, 1981 to Dec. 31, 2010. It contains `r nrow(ny_noaa)` observations and `r ncol(ny_noaa)` variables. The key variables include `r colnames(ny_noaa)`. There are `r count(distinct(ny_noaa, id))` distinct weather stations in New York State. This dataset contains extensive missing data, in which `tmax` and `tmin` have a higher percent of missing data, almost to 44% for each,  and `snow` and `snwd` have a lower percent of missing data.
 
+### Clean data, create variables and wrangle data
 
+```{r}
+noaa_tidy = ny_noaa %>% 
+  janitor::clean_names() %>% 
+  separate(date, into = c("year", "month","day"), sep = "-") %>% 
+  mutate(
+    prcp = prcp / 10,
+    tmax = as.numeric(tmax) / 10,
+    tmin = as.numeric(tmin) / 10,
+    year = as.numeric(year),
+    month = month.name[as.numeric(month)],
+    day = as.numeric(day)
+    ) 
+  
+```
+
+```{r}
+noaa_tidy %>% 
+  count(snow) %>% 
+  arrange(desc(n))
+```
+
+**Description**
+
+The variables of `prcp`, `tmax` and `tmin` are divided by 10 to get reasonable units, because their original units are tenths of standard units. The most commonly observed values for snowfall is 0.
 
 
 
