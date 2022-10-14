@@ -32,3 +32,23 @@ scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
 ```
 
+
+## Problem 1
+
+### Load and read `instacart` data
+
+```{r}
+data("instacart")
+
+instacart = 
+  instacart %>% 
+  as_tibble(instacart)
+```
+
+**Description of data**
+
+The `instacart` is a online grocery shopping dataset in 2017. It contains `r nrow(instacart)` observations and `r ncol(instacart)` variables. The key variables include `r colnames(instacart)`.
+
+
+
+
