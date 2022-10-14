@@ -277,5 +277,17 @@ ggplot(noaa_tmax, aes(x = year, y = tmax_mean, color = month)) +
 
 The average max temperature in January is within -10-10°C and it fluctuates a bit along years, but there is no apparent trends of the fluctuation. The average max temperature in July is within 23-30°C and it doesn't fluctuate significantly along years. Comparing the average max temperature of these two months, January has a lower average max temperature than that of July, and January fluctuates more significantly than July. Both months have some outliers, the most outlier for January is about -14°C and the most outlier for July is about 14°C. 
 
+### Plot tmax vs tmin
+
+```{r}
+tmax_tmin = 
+  ggplot(noaa_tidy, aes(x = tmin, y = tmax)) +
+    geom_hex(bins = 40) +
+    labs(
+      title = "NYS tmax vs tmin temperatures",
+      x = "Min temperature(°C)",
+      y = "Max temperature(°C)") +
+    theme(legend.position = "bottom")
+```
 
 
