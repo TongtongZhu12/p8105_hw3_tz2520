@@ -50,5 +50,37 @@ instacart =
 The `instacart` is a online grocery shopping dataset in 2017. It contains `r nrow(instacart)` observations and `r ncol(instacart)` variables. The key variables include `r colnames(instacart)`.
 
 
+### Comment on the results
+
+#### Aisle count and identify 
+
+```{r}
+instacart %>% 
+  group_by(aisle_id, aisle) %>% 
+  summarize(n_obs = n()) %>% 
+  arrange(desc(n_obs))
+  
+```
+
+There are `r max(pull(instacart, aisle_id))` aisles and `fresh vegetables`, `fresh fruits` and `packaged vegetables fruits` are the first, second and third aisles with the most items ordered from, respectively. 
+
+#### Plot aisles
+
+```{r}
+instacart %>% 
+  group_by(aisle) %>% 
+  summarize(n_obs = n()) %>% 
+  filter(n_obs > 10000) %>% 
+  mutate(aisle = forcats::fct_reorder(aisle, n_obs)) %>% 
+  ggplot(aes(x = n_obs, y = aisle)) +
+  geom_col() +
+  labs(
+    title = "Number of items ordered per aisle",
+    x = "Number of items",
+    y = "Aisle name",
+    caption = "Note: Limited to aisles with more than 10000 items ordered"
+  )
+
+```
 
 
