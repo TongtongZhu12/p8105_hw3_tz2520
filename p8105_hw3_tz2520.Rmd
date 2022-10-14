@@ -83,4 +83,24 @@ instacart %>%
 
 ```
 
+#### Table three aisles with three most popular items
+
+```{r}
+instacart %>% 
+  filter(aisle == "baking ingredients" |
+         aisle == "dog food care" |
+         aisle == "packaged vegetables fruits") %>% 
+  group_by(aisle, product_name) %>% 
+  summarize(n_pop = n()) %>% 
+  mutate(rank = min_rank(desc(n_pop))) %>% 
+  filter(rank < 4) %>% 
+  arrange(desc(n_pop)) %>% 
+  knitr::kable()
+  
+```
+
+In `baking ingredients` aisle, the three most popular items are `Light Brown Sugar`, `Pure Baking Soda` and `Cane Sugar`. In `dog food care` aisle, the three most popular items are ` Snack Sticks Chicketn & Rice Recipe Dog Treats` and `Small Dog Biscuits`. In `packaged vegetables fruits` aisle, the three most popular itesm are `Organic Baby Spinach`, `Organic Raspberries` and `Organic Blueberries`.
+
+
+
 
