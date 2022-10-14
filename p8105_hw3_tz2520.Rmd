@@ -1,0 +1,6 @@
+---
+title: "Homework 3"
+output: 
+date: "2022-10-13"
+---
+
