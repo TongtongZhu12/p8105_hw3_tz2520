@@ -196,6 +196,32 @@ accel_df %>%
 Based on this graph, 19:00-22:00 seems to be the time period with relatively high activity for most days. The activity count is highest around 21:00 on Friday and 12:00 on Sunday. The highest activity count is about 9000 for all days. 
 
 
+## Problem 3
+
+### Load `NY NOAA` data
+
+```{r}
+data("ny_noaa")
+```
+
+### Count missing data
+
+```{r}
+noaa_missing = ny_noaa %>% 
+  summarize(
+    prcp_missing = mean(is.na(prcp)),
+    snow_missing = mean(is.na(snow)),
+    snwd_missing = mean(is.na(snwd)),
+    tmax_missing = mean(is.na(tmax)),
+    tmin_missing = mean(is.na(tmin)))
+
+knitr::kable(noaa_missing)
+```
+
+**Description**
+
+The `ny_noaa` dataset provides weather data of New York State weather stations from Jan. 1, 1981 to Dec. 31, 2010. It contains `r nrow(ny_noaa)` observations and `r ncol(ny_noaa)` variables. The key variables include `r colnames(ny_noaa)`. There are `r count(distinct(ny_noaa, id))` distinct weather stations in New York State. This dataset contains extensive missing data, in which `tmax` and `tmin` have a higher percent of missing data, almost to 44% for each,  and `snow` and `snwd` have a lower percent of missing data.
+
 
 
 
