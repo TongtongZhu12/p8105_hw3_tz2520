@@ -282,11 +282,13 @@ The average max temperature in January is within -10-10°C and it fluctuates a b
 ```{r}
 tmax_tmin = 
   ggplot(noaa_tidy, aes(x = tmin, y = tmax)) +
-    geom_hex(bins = 40) +
+    geom_hex() +
     labs(
       title = "NYS tmax vs tmin temperatures",
       x = "Min temperature(°C)",
       y = "Max temperature(°C)") +
+    scale_fill_continuous(
+    breaks = c(10000, 30000, 50000)) +
     theme(legend.position = "bottom")
 ```
 
